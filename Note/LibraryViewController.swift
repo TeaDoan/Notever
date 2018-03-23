@@ -9,11 +9,15 @@
 import UIKit
 import Vision
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDataSource {
 
     @IBOutlet weak var cameraView: UIImageView!
     
+    @IBOutlet weak var tableView: UITableView!
     let userPickImage = UIImagePickerController()
+   
+   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         userPickImage.allowsEditing = false
         
         userPickImage.sourceType = .camera
+        
+        
         
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -76,9 +82,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
    
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as? DisplayNoteTableViewCell
+        
+        
+        return cell!
+    }
 
-    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 1
+    }
     }
     
 

@@ -1,19 +1,15 @@
 //
-//  NoteTableViewCell.swift
+//  DisplayNoteTableViewCell.swift
 //  Note
 //
-//  Created by Thao Doan on 3/18/18.
+//  Created by Thao Doan on 3/22/18.
 //  Copyright © 2018 Thao Doan. All rights reserved.
 //
 
 import UIKit
 
-class NoteTableViewCell: UITableViewCell {
+class DisplayNoteTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var imagePicked: UIImageView!
-    @IBOutlet weak var noteTextField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,7 +21,4 @@ class NoteTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-   
-
-    
 }
