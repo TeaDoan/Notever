@@ -18,8 +18,9 @@ class PhotoCapturedViewController: UIViewController {
         return  UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
     }
     
+    @IBOutlet weak var textLabel: UILabel!
     
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textView: UITextView!
     
     
     @IBOutlet weak var displayPhoto: UIImageView!
@@ -29,7 +30,6 @@ class PhotoCapturedViewController: UIViewController {
         displayPhoto.image = image
         self.navigationItem.rightBarButtonItem = makeButton()
         
-       
     }
     
     @objc func doneButtonTapped() {
@@ -39,15 +39,13 @@ class PhotoCapturedViewController: UIViewController {
         let noteDescription = NSEntityDescription.entity(forEntityName: "Note", in: context)!
         let note = NSManagedObject(entity: noteDescription, insertInto: context)
         
-        note.setValue(textField.text, forKey: "text")
-        note.setValue(UIImagePNGRepresentation(image!), forKey: "photo")
+        note.setValue(textView.text, forKey: "text")
+//        note.setValue(UIImagePNGRepresentation(image!), forKey: "photo")
         
         try? context.save()
         
-        dismiss(animated: true, completion: nil)
-        
+        navigationController?.popToRootViewController(animated: true)
     }
-    
    
     
 }

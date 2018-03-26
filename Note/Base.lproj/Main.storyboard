@@ -113,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="761" y="-423"/>
+            <point key="canvasLocation" x="760.79999999999995" y="-423.23838080959524"/>
         </scene>
         <!--Photo Captured View Controller-->
         <scene sceneID="ayy-k3-vSg">
@@ -124,34 +124,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyg-mC-3qc">
-                                <rect key="frame" x="5" y="69" width="76" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="5" y="69" width="86" height="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="0.1712651962" green="0.35170532290000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Oz-96-ar5">
-                                <rect key="frame" x="20" y="100" width="335" height="30"/>
-                                <nil key="textColor"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AeF-lH-f1e">
+                                <rect key="frame" x="5" y="89" width="365" height="127"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WgP-1n-3Es">
-                                <rect key="frame" x="0.0" y="154" width="375" height="239"/>
+                                <rect key="frame" x="0.0" y="213" width="375" height="149"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="owl-Pa-CQ0" firstAttribute="trailing" secondItem="wyg-mC-3qc" secondAttribute="trailing" constant="294" id="3qB-qo-rT7"/>
-                            <constraint firstItem="0Oz-96-ar5" firstAttribute="top" secondItem="wyg-mC-3qc" secondAttribute="bottom" constant="10" id="C87-xm-2aZ"/>
-                            <constraint firstItem="wyg-mC-3qc" firstAttribute="leading" secondItem="owl-Pa-CQ0" secondAttribute="leading" constant="5" id="Dnr-4K-L89"/>
+                            <constraint firstItem="wyg-mC-3qc" firstAttribute="top" secondItem="owl-Pa-CQ0" secondAttribute="top" constant="5" id="7x8-yX-mM9"/>
+                            <constraint firstItem="wyg-mC-3qc" firstAttribute="leading" secondItem="owl-Pa-CQ0" secondAttribute="leading" constant="5" id="GG7-Yk-XNZ"/>
                             <constraint firstItem="WgP-1n-3Es" firstAttribute="leading" secondItem="owl-Pa-CQ0" secondAttribute="leading" id="Jg1-0A-5ql"/>
                             <constraint firstItem="WgP-1n-3Es" firstAttribute="trailing" secondItem="owl-Pa-CQ0" secondAttribute="trailing" id="KM6-2i-qf9"/>
-                            <constraint firstItem="owl-Pa-CQ0" firstAttribute="trailing" secondItem="0Oz-96-ar5" secondAttribute="trailing" constant="20" id="N8q-xH-ENE"/>
-                            <constraint firstItem="wyg-mC-3qc" firstAttribute="top" secondItem="owl-Pa-CQ0" secondAttribute="top" constant="5" id="R9O-N9-FKd"/>
-                            <constraint firstItem="0Oz-96-ar5" firstAttribute="top" secondItem="wyg-mC-3qc" secondAttribute="bottom" constant="10" id="RZh-as-ytO"/>
-                            <constraint firstItem="WgP-1n-3Es" firstAttribute="top" secondItem="0Oz-96-ar5" secondAttribute="bottom" constant="24" id="UI1-Jf-ZBK"/>
-                            <constraint firstItem="owl-Pa-CQ0" firstAttribute="bottom" secondItem="WgP-1n-3Es" secondAttribute="bottom" constant="230" id="eYI-p6-QGz"/>
-                            <constraint firstItem="0Oz-96-ar5" firstAttribute="leading" secondItem="owl-Pa-CQ0" secondAttribute="leading" constant="20" id="foP-L3-5S8"/>
+                            <constraint firstItem="owl-Pa-CQ0" firstAttribute="trailing" secondItem="wyg-mC-3qc" secondAttribute="trailing" constant="284" id="MvD-fh-T9p"/>
+                            <constraint firstItem="owl-Pa-CQ0" firstAttribute="trailing" secondItem="AeF-lH-f1e" secondAttribute="trailing" constant="5" id="QvT-Dk-vj0"/>
+                            <constraint firstItem="owl-Pa-CQ0" firstAttribute="bottom" secondItem="AeF-lH-f1e" secondAttribute="bottom" constant="407" id="W6P-xJ-kJW"/>
+                            <constraint firstItem="owl-Pa-CQ0" firstAttribute="bottom" secondItem="WgP-1n-3Es" secondAttribute="bottom" constant="261" id="eYI-p6-QGz"/>
+                            <constraint firstItem="AeF-lH-f1e" firstAttribute="top" secondItem="owl-Pa-CQ0" secondAttribute="top" constant="25" id="euz-ww-clf"/>
+                            <constraint firstItem="AeF-lH-f1e" firstAttribute="leading" secondItem="owl-Pa-CQ0" secondAttribute="leading" constant="5" id="ipg-iT-TDT"/>
+                            <constraint firstItem="WgP-1n-3Es" firstAttribute="top" secondItem="wyg-mC-3qc" secondAttribute="bottom" constant="124" id="taT-P3-WFe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="owl-Pa-CQ0"/>
                     </view>
@@ -159,12 +159,13 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="displayPhoto" destination="WgP-1n-3Es" id="VrB-HI-ZCj"/>
-                        <outlet property="textField" destination="0Oz-96-ar5" id="WGI-6t-3dv"/>
+                        <outlet property="textLabel" destination="wyg-mC-3qc" id="RNu-nf-kY8"/>
+                        <outlet property="textView" destination="AeF-lH-f1e" id="1mK-za-B9E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="klZ-Ur-SWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1622" y="-423"/>
+            <point key="canvasLocation" x="1621.5999999999999" y="-423.23838080959524"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rmI-hZ-oVb">

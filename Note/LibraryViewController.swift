@@ -8,18 +8,20 @@
 
 import UIKit
 import Vision
+import CoreData
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDataSource {
 
+    var notes = [Note]()
+    let context = CoreDataStack.shared.context
+      let userPickImage = UIImagePickerController()
+    
+    
     @IBOutlet weak var cameraView: UIImageView!
     
     @IBOutlet weak var tableView: UITableView!
-    let userPickImage = UIImagePickerController()
-   
-   
     
-    
-    override func viewDidLoad() {
+     override func viewDidLoad() {
         super.viewDidLoad()
         
         userPickImage.delegate = self
@@ -27,30 +29,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         userPickImage.allowsEditing = false
         
         userPickImage.sourceType = .camera
-        
-        
-        
-        
+                
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        loadNoteItem()
     }
 
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let userPickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
 //            cameraView.image = userPickedImage
             
             performSegue(withIdentifier: "showPhotos", sender: userPickedImage)
-            
-           
+        
         }
         
-       userPickImage.dismiss(animated: true, completion: nil)
-        
+        userPickImage.dismiss(animated: true, completion: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,16 +61,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     
                     caputreVC.image = image
                 }
-                
-                
             }
-            
-            
-           
-            
-            
         }
-        
     }
     
     
@@ -91,8 +81,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return notes.count
     }
+    
+    
+    
+    
+    
+    
+    func loadNoteItem(){
+        
+        let request: NSFetchRequest<Note> = Note.fetchRequest()
+        do {
+           
+            notes = try context.fetch(request)
+        } catch {
+            
+            print("Error fetching data from context\(error)")
+        }
+        
+        
+        
+    }
+    
+    
     }
     
 
