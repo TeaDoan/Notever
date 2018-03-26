@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B03E533D206896E100DE3A93 /* UIImage+Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03E533C206896E100DE3A93 /* UIImage+Local.swift */; };
 		B0F23F18205DAC4C00F26513 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F23F17205DAC4C00F26513 /* AppDelegate.swift */; };
 		B0F23F1A205DAC4C00F26513 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F23F19205DAC4C00F26513 /* LibraryViewController.swift */; };
 		B0F23F1D205DAC4C00F26513 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0F23F1B205DAC4C00F26513 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B03E533C206896E100DE3A93 /* UIImage+Local.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Local.swift"; sourceTree = "<group>"; };
 		B0F23F14205DAC4C00F26513 /* Note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Note.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F23F17205DAC4C00F26513 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0F23F19205DAC4C00F26513 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				B0F23F29205DBF5C00F26513 /* PhotoCapturedViewController.swift */,
 				B0F23F1B205DAC4C00F26513 /* Main.storyboard */,
 				B0F23F3B2064C8DC00F26513 /* FileManager+Paths.swift */,
+				B03E533C206896E100DE3A93 /* UIImage+Local.swift */,
 				B0F23F3D2064C8E900F26513 /* CoreDataStack.swift */,
 				B0F23F362064C03F00F26513 /* Model.xcdatamodeld */,
 				B0F23F34206458C600F26513 /* DisplayNoteTableViewCell.swift */,
@@ -156,6 +159,7 @@
 				B0F23F2A205DBF5C00F26513 /* PhotoCapturedViewController.swift in Sources */,
 				B0F23F3C2064C8DC00F26513 /* FileManager+Paths.swift in Sources */,
 				B0F23F382064C03F00F26513 /* Model.xcdatamodeld in Sources */,
+				B03E533D206896E100DE3A93 /* UIImage+Local.swift in Sources */,
 				B0F23F1A205DAC4C00F26513 /* LibraryViewController.swift in Sources */,
 				B0F23F18205DAC4C00F26513 /* AppDelegate.swift in Sources */,
 			);

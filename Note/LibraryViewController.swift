@@ -10,14 +10,14 @@ import UIKit
 import Vision
 import CoreData
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDataSource {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate{
 
     var notes = [Note]()
     let context = CoreDataStack.shared.context
-      let userPickImage = UIImagePickerController()
+    let userPickImage = UIImagePickerController()
     
     
-    @IBOutlet weak var cameraView: UIImageView!
+   
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,13 +29,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         userPickImage.allowsEditing = false
         
         userPickImage.sourceType = .camera
+        
+        
+        
+        
                 
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        loadNoteItem()
+        loadNoteItem()
     }
 
     
@@ -74,17 +78,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as? DisplayNoteTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! DisplayNoteTableViewCell
         
+        let note = notes[indexPath.row]
         
-        return cell!
+//        cell.imageSavedView?.image = UIImage.imageFor(note.guid)
+//        cell.textViewSaved.text = note.text
+        
+        cell.imageView?.image = UIImage.imageFor(note.guid)
+        
+        cell.textViewCell.text = note.text
+        
+        return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
     return notes.count
+        
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 100 
+    }
+
+
     
     
     
@@ -95,6 +114,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         do {
            
             notes = try context.fetch(request)
+            tableView.reloadData()
+            
         } catch {
             
             print("Error fetching data from context\(error)")
