@@ -9,8 +9,10 @@
 import UIKit
 
 class DisplayNoteTableViewCell: UITableViewCell {
-    @IBOutlet weak var textViewCell: UITextView!
     
+    @IBOutlet weak var noteContentLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var photoView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

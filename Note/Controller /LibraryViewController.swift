@@ -10,6 +10,7 @@ import UIKit
 import Vision
 import CoreData
 
+
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate{
 
     var notes = [Note]()
@@ -29,10 +30,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         userPickImage.allowsEditing = false
         
         userPickImage.sourceType = .camera
-        
-        
-        
-        
+    
+        tableView.separatorStyle = .singleLine
                 
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -85,10 +84,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 //        cell.imageSavedView?.image = UIImage.imageFor(note.guid)
 //        cell.textViewSaved.text = note.text
         
-        cell.imageView?.image = UIImage.imageFor(note.guid)
+//        cell.imageView?.image = UIImage.imageFor(note.guid)
+        cell.photoView.image = UIImage.imageFor(note.guid)
+        cell.noteContentLabel.text = note.text
+        cell.titleLabel.text = note.title
         
-        cell.textViewCell.text = note.text
+        cell.layoutMargins = UIEdgeInsets.zero // remove table cell separator margin
+        cell.contentView.layoutMargins.left = 30 // set up left margin to 20
+    
+        cell.contentView.backgroundColor = .clear
         
+        cell.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        
+        
+        
+        
+    
         return cell
     }
 
@@ -99,12 +110,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 100 
+        return 80
     }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//            if let cell = tableView.cellForRow(at: indexPath) as? DisplayNoteTableViewCell {
+//            
+//            tableView.beginUpdates()
+//            tableView.endUpdates()
+//            tableView.deselectRow(at: indexPath, animated: true)
+//        }
+//    }
 
-
-    
     
     
     

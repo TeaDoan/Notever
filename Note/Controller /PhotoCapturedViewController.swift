@@ -21,6 +21,7 @@ class PhotoCapturedViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
     
+    @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var displayPhoto: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,9 @@ class PhotoCapturedViewController: UIViewController {
         displayPhoto.image = image
         
         self.navigationItem.rightBarButtonItem = makeButton()
+        
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.7333333333, blue: 0.9411764706, alpha: 1)
+       
         
     }
     
@@ -41,6 +45,7 @@ class PhotoCapturedViewController: UIViewController {
         let note = NSManagedObject(entity: noteDescription, insertInto: context)
         
         note.setValue(textView.text, forKey: "text")
+        note.setValue(titleTextField.text, forKey: "title")
         
         let randomString = NSUUID().uuidString
         
