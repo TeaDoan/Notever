@@ -10,10 +10,9 @@ import UIKit
 
 extension UIImage {
  
-    class func imageFor(_ guid: String?) -> UIImage? {
-        guard let guid = guid else { return nil }
+    class func imageFor(_ path: URL) -> UIImage? {
         do {
-            let data = try Data(contentsOf: UIImage.filePath(for: guid))
+            let data = try Data(contentsOf: path)
             return UIImage(data: data)
         } catch let err {
             print(err)
@@ -21,9 +20,21 @@ extension UIImage {
         }
     }
     
-    class func filePath(for guid: String) -> URL {
-
+    class func originalImagePath(for guid: String) -> URL {
         let documentsDir = FileManager.default.documentsDirectory()
         return documentsDir.appendingPathComponent("\(guid).jpg")
     }
+    
+    class func thumbnailPath(for guid: String) -> URL {
+        let documentsDir = FileManager.default.documentsDirectory()
+        return documentsDir.appendingPathComponent("\(guid)-thumbnail.jpg")
+    }
+    
+//    func scaled(to size: CGSize) -> UIImage? {
+//        UIGraphicsBeginImageContext( size )
+//        draw(in: CGRect(x: 0,y: 0,width: size.width,height: size.height))
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return newImage?.withRenderingMode(.alwaysOriginal)
+//    }
 }

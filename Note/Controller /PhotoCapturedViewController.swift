@@ -7,11 +7,14 @@
 //
 
 import UIKit
-import CoreData 
+import CoreData
+import ChameleonFramework
 
 class PhotoCapturedViewController: UIViewController {
 
     var image: UIImage?
+    var titleDetails : UILabel?
+    var textViewDetails : UITextView?
     
    func makeButton() -> UIBarButtonItem {
         return  UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
@@ -23,45 +26,65 @@ class PhotoCapturedViewController: UIViewController {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var displayPhoto: UIImageView!
+    
+    var note: Note?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayPhoto.image = image
+        
+        if let existingNote = note { // set image and text UI for existing note
+            displayPhoto.image = .imageFor(UIImage.originalImagePath(for: existingNote.guid!))
+            textView.text = existingNote.text
+            titleTextField.text = existingNote.title
+        } else { // create new note, then set image from camera
+            let context = CoreDataStack.shared.context
+            let noteDescription = NSEntityDescription.entity(forEntityName: "Note", in: context)!
+            note = NSManagedObject(entity: noteDescription, insertInto: context) as? Note
+            displayPhoto.image = image
+            
+            // set guid for new note
+            let randomString = NSUUID().uuidString
+            note?.setValue(randomString, forKey: "guid")
+        }
         
         self.navigationItem.rightBarButtonItem = makeButton()
-        
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.7333333333, blue: 0.9411764706, alpha: 1)
-       
         
+        textView.backgroundColor = UIColor.randomFlat.lighten(byPercentage: 0.7)
+        textLabel.textColor = UIColor.randomFlat.darken(byPercentage: 0.9)
+        titleTextField.backgroundColor = UIColor.flatMint
     }
     
     @objc func doneButtonTapped() {
         
+        // create note from user's text
         let context = CoreDataStack.shared.context
+        note?.setValue(textView.text, forKey: "text")
+        note?.setValue(titleTextField.text, forKey: "title")
         
-        /// Create note entity
-        let noteDescription = NSEntityDescription.entity(forEntityName: "Note", in: context)!
+        // get thumbnail in place for new note
+        let thumbnailSize = CGSize.init(width: 200, height: 200)
+        let thumbnailData = UIImageJPEGRepresentation(displayPhoto.image!.imageScaled(to: thumbnailSize), 0.9)
         
-        let note = NSManagedObject(entity: noteDescription, insertInto: context)
-        
-        note.setValue(textView.text, forKey: "text")
-        note.setValue(titleTextField.text, forKey: "title")
-        
-        let randomString = NSUUID().uuidString
-        
-        note.setValue(randomString, forKey: "guid")
-        
-        let data = UIImagePNGRepresentation(image!)
-        
+        // write to thumbnail path
         let documentDir = FileManager.default.documentsDirectory()
+        let thumbnailPath = documentDir.appendingPathComponent("\(note!.guid!)-thumbnail.jpg")
+        try? thumbnailData?.write(to: thumbnailPath)
         
-        let photoPath = documentDir.appendingPathComponent("\(randomString).jpg")
+        // get original image in place for new note
+        let data = UIImageJPEGRepresentation(displayPhoto.image!, 0.9)
         
+        // write to orignal photo path
+        let photoPath = documentDir.appendingPathComponent("\(note!.guid!).jpg")
         try? data?.write(to: photoPath)
         
+        // save Core Data
         try? context.save()
         
+        // leave
         navigationController?.popToRootViewController(animated: true)
     }
    
 }
+
