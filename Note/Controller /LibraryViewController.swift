@@ -11,20 +11,19 @@ import Vision
 import CoreData
 import ChameleonFramework
 
+private enum TSegue: String {
+    case onboard = "onboard"
+    case showPhotos = "showPhotos"
+}
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate{
-// notes is an object which is an array of Note
-    var notes = [Note]()
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
     let context = CoreDataStack.shared.context
     let userPickImage = UIImagePickerController()
     let searchController = UISearchController(searchResultsController: nil)
-   
-
-//
-   
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
         let request = NSFetchRequest<Note>(entityName:"Note")
@@ -51,21 +50,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         try? fetchedResultsController.performFetch()
         
-         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9450980392, green: 0.168627451, blue: 0.4196078431, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.737254902, green: 0.9215686275, blue: 0.2352941176, alpha: 1)
         
-        
-        
-        
-        
-       
-        // Do any additional setup after loading the view, typically from a nib.
+        // show onboarding on first launch
+        let hasLaunchedKey = "appHasLaunched"
+        if UserDefaults.standard.value(forKey: hasLaunchedKey) == nil {
+            performSegue(withIdentifier: "onboard", sender: nil)
+            UserDefaults.standard.set(false, forKey: hasLaunchedKey)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
-      self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9450980392, green: 0.168627451, blue: 0.4196078431, alpha: 1)
+      self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.737254902, green: 0.9215686275, blue: 0.2352941176, alpha: 1)
         
          loadNoteItem()
     }
@@ -73,27 +72,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "showPhotos", sender: notes[indexPath.row])
+        performSegue(withIdentifier: "showPhotos", sender: fetchedResultsController.object(at: indexPath))
     }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showPhotos"{
-//            let viewController:PhotoCapturedViewController = segue.destination as! PhotoCapturedViewController
-////            viewController.image = sender as! Note
-//            viewController.textViewDetails = sender as? UITextView
-//            viewController.titleDetails = sender as? UILabel
-//
-//        }
-//    }
 
-
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let userPickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
-//            cameraView.image = userPickedImage
-            
             performSegue(withIdentifier: "showPhotos", sender: userPickedImage)
-        
         }
         
         userPickImage.dismiss(animated: true, completion: nil)
@@ -101,17 +85,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             
-            if segue.identifier == "showPhotos" {
-                
-                if let captureVC = segue.destination as? PhotoCapturedViewController {
-                    
-                    if let image = sender as? UIImage { // image -> new note
-                        captureVC.image = image
-                        
-                    } else if let note = sender as? Note { // existing note
-                        captureVC.note = note
-                    }
+            guard let tSegue = TSegue(rawValue: segue.identifier!) else { return }
+            print("about to perform segue: \(tSegue.rawValue)")
+            
+            switch tSegue {
+            case .showPhotos:
+                let captureVC = segue.destination as! PhotoCapturedViewController
+                if let image = sender as? UIImage {
+                    captureVC.image = image // new note -> pass image
+                } else if let note = sender as? Note {
+                    captureVC.note = note // existing note -> pass note
                 }
+            case .onboard: break
+                // you'd do any preparation before showing onboarding here
             }
         }
     
@@ -136,23 +122,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         cell.contentView.layoutMargins.left = 30 // set up left margin to 30
         cell.contentView.backgroundColor = .clear
         
-//        UIImage.imageFor(note.guid)!
-        
-//        cell.photoView?.image = imageWithImage(image: UIImage.imageFor(note.guid), scaledToSize: cell.photoView?.bounds.size ?? .zero)
-        
-//        cell.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        cell.backgroundColor = UIColor.init(randomFlatColorOf: .dark, withAlpha: 0.5).lighten(byPercentage: 0.9)
 
-//        cell.backgroundColor = UIColor.randomFlat.lighten(byPercentage: 0.9)
-//
-//        cell.noteContentLabel.textColor = UIColor.randomFlat.darken(byPercentage: 1.0)
-//
-//        cell.titleLabel.textColor = UIColor.randomFlat.darken(byPercentage: 0.5)
+        cell.noteContentLabel.textColor = UIColor.randomFlat.darken(byPercentage: 1.0)
+
+        cell.titleLabel.textColor = UIColor.randomFlat.darken(byPercentage: 0.5)
         
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
         
     }
@@ -164,43 +143,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 
-        let eventArrayItem = notes[indexPath.row]
+        let eventArrayItem = fetchedResultsController.object(at: indexPath)
 
         if editingStyle == .delete {
 
             context.delete(eventArrayItem)
-
+            
             do {
                 try context.save()
-
-              tableView.reloadData()
+               tableView.reloadData()
 
             } catch let error as NSError {
 
                 print("Error While Deleting Note: \(error.userInfo)")
             }
         }
-        
-        loadNoteItem()
-
     }
-
+    
 
     func loadNoteItem(){
-        
-        let request: NSFetchRequest<Note> = Note.fetchRequest()
-        do {
-           
-            notes = try context.fetch(request)
-            
-            tableView.reloadData()
-            
-        } catch {
-            
-            print("Error fetching data from context\(error)")
-        }
-        
-        
+        try? fetchedResultsController.performFetch()
     }
 
 }
@@ -226,6 +188,8 @@ extension ViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
+    
+    
 }
 
 extension ViewController: NSFetchedResultsControllerDelegate {
@@ -251,26 +215,8 @@ extension ViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
+    
 }
-
-//extension UIImage {
-//    func fixOrientation() -> UIImage {
-//        if self.imageOrientation == UIImageOrientation.up {
-//            return self
-//        }
-//        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
-//        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
-//        if let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() {
-//            UIGraphicsEndImageContext()
-//            return normalizedImage
-//        } else {
-//            return self
-//        }
-//    }
-//}
-
-
-
 
 
 

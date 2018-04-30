@@ -49,11 +49,13 @@ class PhotoCapturedViewController: UIViewController {
         }
         
         self.navigationItem.rightBarButtonItem = makeButton()
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.7333333333, blue: 0.9411764706, alpha: 1)
+//        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.7333333333, blue: 0.9411764706, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.737254902, green: 0.9215686275, blue: 0.2352941176, alpha: 1)
         
-        textView.backgroundColor = UIColor.randomFlat.lighten(byPercentage: 0.7)
+//        textView.backgroundColor = UIColor.randomFlat.lighten(byPercentage: 0.7)
+        textView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         textLabel.textColor = UIColor.randomFlat.darken(byPercentage: 0.9)
-        titleTextField.backgroundColor = UIColor.flatMint
+        titleTextField.backgroundColor = #colorLiteral(red: 0.4862745098, green: 0.7411764706, blue: 0.1176470588, alpha: 1)
     }
     
     @objc func doneButtonTapped() {
@@ -64,7 +66,7 @@ class PhotoCapturedViewController: UIViewController {
         note?.setValue(titleTextField.text, forKey: "title")
         
         // get thumbnail in place for new note
-        let thumbnailSize = CGSize.init(width: 200, height: 200)
+        let thumbnailSize = CGSize.init(width: 600, height: 600)
         let thumbnailData = UIImageJPEGRepresentation(displayPhoto.image!.imageScaled(to: thumbnailSize), 0.9)
         
         // write to thumbnail path

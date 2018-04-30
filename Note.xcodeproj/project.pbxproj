@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B03820702096B8D3004BC4BB /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B038206F2096B8D3004BC4BB /* OnboardViewController.swift */; };
 		B03E533D206896E100DE3A93 /* UIImage+Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03E533C206896E100DE3A93 /* UIImage+Local.swift */; };
 		B0F23F18205DAC4C00F26513 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F23F17205DAC4C00F26513 /* AppDelegate.swift */; };
 		B0F23F1A205DAC4C00F26513 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F23F19205DAC4C00F26513 /* LibraryViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		35406DF64364DC38FA4DEA4E /* Pods-Note.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Note.release.xcconfig"; path = "Pods/Target Support Files/Pods-Note/Pods-Note.release.xcconfig"; sourceTree = "<group>"; };
 		6C9836C0E0321147733E2EA9 /* Pods_Note.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Note.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B038206F2096B8D3004BC4BB /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		B03E533C206896E100DE3A93 /* UIImage+Local.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Local.swift"; sourceTree = "<group>"; };
 		B0F23F14205DAC4C00F26513 /* Note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Note.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F23F17205DAC4C00F26513 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				B0F23F362064C03F00F26513 /* Model.xcdatamodeld */,
 				B03E533E2069A62600DE3A93 /* Data */,
 				B0F23F1B205DAC4C00F26513 /* Main.storyboard */,
+				B038206F2096B8D3004BC4BB /* OnboardViewController.swift */,
 				B03E533F2069A65D00DE3A93 /* Controller  */,
 				B0F23F1E205DAC4C00F26513 /* Assets.xcassets */,
 				B0F23F20205DAC4C00F26513 /* LaunchScreen.storyboard */,
@@ -256,6 +259,7 @@
 				B0F23F2A205DBF5C00F26513 /* PhotoCapturedViewController.swift in Sources */,
 				B0F23F3C2064C8DC00F26513 /* FileManager+Paths.swift in Sources */,
 				B0F23F382064C03F00F26513 /* Model.xcdatamodeld in Sources */,
+				B03820702096B8D3004BC4BB /* OnboardViewController.swift in Sources */,
 				B03E533D206896E100DE3A93 /* UIImage+Local.swift in Sources */,
 				B0F23F1A205DAC4C00F26513 /* LibraryViewController.swift in Sources */,
 				B0F23F18205DAC4C00F26513 /* AppDelegate.swift in Sources */,
