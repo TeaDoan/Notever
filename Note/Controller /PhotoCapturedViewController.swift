@@ -53,7 +53,7 @@ class PhotoCapturedViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.737254902, green: 0.9215686275, blue: 0.2352941176, alpha: 1)
         
 //        textView.backgroundColor = UIColor.randomFlat.lighten(byPercentage: 0.7)
-        textView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        textView.backgroundColor = #colorLiteral(red: 1, green: 0.9294117647, blue: 0.3647058824, alpha: 1)
         textLabel.textColor = UIColor.randomFlat.darken(byPercentage: 0.9)
         titleTextField.backgroundColor = #colorLiteral(red: 0.4862745098, green: 0.7411764706, blue: 0.1176470588, alpha: 1)
     }
@@ -61,6 +61,7 @@ class PhotoCapturedViewController: UIViewController {
     @objc func doneButtonTapped() {
         
         // create note from user's text
+    
         let context = CoreDataStack.shared.context
         note?.setValue(textView.text, forKey: "text")
         note?.setValue(titleTextField.text, forKey: "title")
