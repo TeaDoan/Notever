@@ -409,7 +409,7 @@
 				DEVELOPMENT_TEAM = S7CCUH8W47;
 				INFOPLIST_FILE = Note/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.teadoan.Kenote;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teadoan.KeNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -427,7 +427,7 @@
 				DEVELOPMENT_TEAM = S7CCUH8W47;
 				INFOPLIST_FILE = Note/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.teadoan.Kenote;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teadoan.KeNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
