@@ -19,12 +19,10 @@ extension UIImage {
             return nil
         }
     }
-    
     class func originalImagePath(for guid: String) -> URL {
         let documentsDir = FileManager.default.documentsDirectory()
         return documentsDir.appendingPathComponent("\(guid).jpg")
     }
-    
     class func thumbnailPath(for guid: String) -> URL {
         let documentsDir = FileManager.default.documentsDirectory()
         return documentsDir.appendingPathComponent("\(guid)-thumbnail.jpg")

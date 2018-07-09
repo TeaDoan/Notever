@@ -11,7 +11,6 @@ import CoreData
 import ChameleonFramework
 
 class PhotoCapturedViewController: UIViewController {
-
     var image: UIImage?
     var titleDetails : UILabel?
     var textViewDetails : UITextView?
@@ -21,9 +20,7 @@ class PhotoCapturedViewController: UIViewController {
     }
     
     @IBOutlet weak var textLabel: UILabel!
-    
     @IBOutlet weak var textView: UITextView!
-    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var displayPhoto: UIImageView!
     
@@ -31,37 +28,23 @@ class PhotoCapturedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        if let existingNote = note { // set image and text UI for existing note
-            displayPhoto.image = .imageFor(UIImage.originalImagePath(for: existingNote.guid!))
-            textView.text = existingNote.text
-            titleTextField.text = existingNote.title
-        } else { // create new note, then set image from camera
-            let context = CoreDataStack.shared.context
-            let noteDescription = NSEntityDescription.entity(forEntityName: "Note", in: context)!
-            note = NSManagedObject(entity: noteDescription, insertInto: context) as? Note
-            displayPhoto.image = image
-            
-            // set guid for new note
-            let randomString = NSUUID().uuidString
-            note?.setValue(randomString, forKey: "guid")
-        }
-        
+        updateViews()
         self.navigationItem.rightBarButtonItem = makeButton()
-//        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0.7333333333, blue: 0.9411764706, alpha: 1)
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.737254902, green: 0.9215686275, blue: 0.2352941176, alpha: 1)
-        
-//        textView.backgroundColor = UIColor.randomFlat.lighten(byPercentage: 0.7)
-        textView.backgroundColor = #colorLiteral(red: 1, green: 0.9294117647, blue: 0.3647058824, alpha: 1)
+        self.navigationItem.title = titleTextField.text
+        textView.backgroundColor = #colorLiteral(red: 0.8745098039, green: 0.9450980392, blue: 0.5882352941, alpha: 1)
         textLabel.textColor = UIColor.randomFlat.darken(byPercentage: 0.9)
         titleTextField.backgroundColor = #colorLiteral(red: 0.4862745098, green: 0.7411764706, blue: 0.1176470588, alpha: 1)
+//        let gradientLayer:CAGradientLayer = CAGradientLayer()
+//        gradientLayer.frame.size = self.textView.frame.size
+//        gradientLayer.colors =
+//            [UIColor.white.cgColor,UIColor.red.withAlphaComponent(1).cgColor]
+//        //Use diffrent colors
+//        self.textView.layer.addSublayer(gradientLayer)
     }
     
     @objc func doneButtonTapped() {
-        
         // create note from user's text
-    
         let context = CoreDataStack.shared.context
         note?.setValue(textView.text, forKey: "text")
         note?.setValue(titleTextField.text, forKey: "title")
@@ -88,6 +71,20 @@ class PhotoCapturedViewController: UIViewController {
         // leave
         navigationController?.popToRootViewController(animated: true)
     }
-   
+    func updateViews() {
+        if let existingNote = note { // set image and text UI for existing note
+            displayPhoto.image = .imageFor(UIImage.originalImagePath(for: existingNote.guid!))
+            textView.text = existingNote.text
+            titleTextField.text = existingNote.title
+        } else { // create new note, then set image from camera
+            let context = CoreDataStack.shared.context
+            let noteDescription = NSEntityDescription.entity(forEntityName: "Note", in: context)!
+            note = NSManagedObject(entity: noteDescription, insertInto: context) as? Note
+            displayPhoto.image = image
+            // set guid for new note
+            let randomString = NSUUID().uuidString
+            note?.setValue(randomString, forKey: "guid")
+        }
+    }
 }
 

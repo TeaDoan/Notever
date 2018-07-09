@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 final class CoreDataStack {
-    
     private let documentsDir = FileManager.default.documentsDirectory()
     static let shared = CoreDataStack()
     //persistentContainer is the app database. Create a new NSPersistentContainer using "Model" data
@@ -23,9 +22,7 @@ final class CoreDataStack {
         })
         return container
     }()
-    
     lazy var context: NSManagedObjectContext = persistentContainer.viewContext
-    
     //context is temporory area where we can change things and update things that we want before we're happy to our changes then save it permernant our database.
     
     func saveContext(){
